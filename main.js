@@ -51,6 +51,7 @@ const utility = {
     const number = Array.from(Array(count).keys())
     for (let index = number.length - 1; index > 0; index--) {
       let randomIndex = Math.floor(Math.random() * (index + 1));
+      //解構賦值 等號兩邊如果都是[] or {} 就可以交換
         [number[index], number[randomIndex]] = [number[randomIndex], number[index]]
     }
     return number
@@ -58,3 +59,10 @@ const utility = {
 }
 
 view.displayCards()
+//給每張卡片加上監聽器
+//先選出所有卡片會是一個NodeList 在用forEach迭代 把每一張卡片加上監聽器
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', event => {
+    console.log(card)
+  })
+})
