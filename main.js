@@ -71,6 +71,21 @@ const view = {
 
 }
 
+//model處理資料
+const model = {
+  //存放被翻開的卡片資料
+  revealedCards: []
+}
+
+//Controller 控制要幹嘛
+const controller = {
+  currentState: GAME_STATE.FirstCardAwaits, //初始狀態還沒翻牌
+}
+
+
+
+
+
 //洗牌演算法
 const utility = {
   getRandomNumberArray (count) {
