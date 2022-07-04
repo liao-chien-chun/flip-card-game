@@ -9,7 +9,7 @@ const Symbols = [
 const view = {
   //負責生成卡片內容，包括花色和數字
   getCardElement (index) {
-    return `<div class="card back"></div>`
+    return `<div data-index="${index}" class="card back"></div>`
   },
 
   getCardContent (index) {
@@ -51,7 +51,7 @@ const view = {
     if (card.classList.contains('back')) {
       //如果點的是背面回傳正面
       card.classList.remove('back')
-      card.innerHTML = this.getCardContent(10)
+      card.innerHTML = this.getCardContent(Number(card.dataset.index))
       return
     }
     //如果點的是正面回傳背面
