@@ -1,3 +1,12 @@
+//設定遊戲狀態
+const GAME_STATE = {
+  FirstCardAwaits: 'FirstCardAwaits',
+  SecondCardAwaits: 'SecondCardAwaits',
+  CardsMatchFailed: 'CardsMatchFailed',
+  CardsMatched: 'CardsMatched',
+  GameFinished: 'GameFinished',
+}
+
 //卡片圖案此處 Symbols 常數儲存的資料不會變動，因此習慣上將首字母大寫以表示此特性。
 const Symbols = [
   'https://assets-lighthouse.alphacamp.co/uploads/image/file/17989/__.png', // 黑桃
@@ -51,7 +60,7 @@ const view = {
     if (card.classList.contains('back')) {
       //如果點的是背面回傳正面
       card.classList.remove('back')
-      card.innerHTML = this.getCardContent(Number(card.dataset.index))
+      card.innerHTML = this.getCardContent(Number(card.dataset.index)) //使用dataset要轉成數字
       return
     }
     //如果點的是正面回傳背面
