@@ -9,15 +9,17 @@ const Symbols = [
 const view = {
   //負責生成卡片內容，包括花色和數字
   getCardElement (index) {
+    return `<div class="card back"></div>`
+  },
+
+  getCardContent (index) {
     const number = this.transformNumber((index % 13) + 1) //ex 1 % 13 = 1在加1就變成2 卡片數字 
     //0~12 / 13 捨去小數點 都會是0所以在Symbols 陣列裡都會是索引值0的黑桃
     const symbol = Symbols[Math.floor(index / 13)]  //取得卡片花色
     return `
-      <div class="card">
         <p>${number}</p>
         <img src="${symbol}" alt="">
-        <p>${number}</p>
-      </div>`
+        <p>${number}</p>`
   },
 
   //特殊數字轉換：transformNumber 11,12,13,1 JQKA
@@ -43,6 +45,21 @@ const view = {
     rootElement.innerHTML = utility.getRandomNumberArray(52).map(index => this.getCardElement(index)).join('')
   },
 
+  //翻牌函式
+  flipCard (card) {
+    console.log(card)
+    if (card.classList.contains('back')) {
+      //如果點的是背面回傳正面
+      card.classList.remove('back')
+      card.innerHTML = this.getCardContent(10)
+      return
+    }
+    //如果點的是正面回傳背面
+    card.classList.add('back')
+    card.innerHTML = null
+  },
+
+
 }
 
 //洗牌演算法
@@ -59,10 +76,12 @@ const utility = {
 }
 
 view.displayCards()
+
 //給每張卡片加上監聽器
 //先選出所有卡片會是一個NodeList 在用forEach迭代 把每一張卡片加上監聽器
 document.querySelectorAll('.card').forEach(card => {
   card.addEventListener('click', event => {
-    console.log(card)
+    //改成翻牌函式
+    view.flipCard(card)
   })
 })

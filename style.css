@@ -6,7 +6,7 @@
 
 .card {
   box-sizing: border-box;
-  
+
   /*flex-basis  flex-grow  flex-shrink*/
   flex: 7% 0 1; /*每個item 分配容器寬度*/
   height: 8vw;
@@ -35,4 +35,10 @@
 /* 第二個數字旋轉倒轉過來 */
 .card p:last-child {
   transform: rotate(180deg);
+}
+
+/*加入牌背樣式*/
+.back {
+  background: url('https://assets-lighthouse.alphacamp.co/uploads/image/file/9222/ExportedContentImage_00.png');
+  background-size: cover;
 }
