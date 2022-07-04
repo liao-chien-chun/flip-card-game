@@ -10,7 +10,6 @@ const view = {
   //負責生成卡片內容，包括花色和數字
   getCardElement (index) {
     const number = this.transformNumber((index % 13) + 1) //ex 1 % 13 = 1在加1就變成2 卡片數字 
-
     //0~12 / 13 捨去小數點 都會是0所以在Symbols 陣列裡都會是索引值0的黑桃
     const symbol = Symbols[Math.floor(index / 13)]  //取得卡片花色
     return `
@@ -19,12 +18,6 @@ const view = {
         <img src="${symbol}" alt="">
         <p>${number}</p>
       </div>`
-  },
-
-  //負責選出#cards並抽換內容
-  displayCards() {
-    const rootElement = document.querySelector('#cards')
-    rootElement.innerHTML = this.getCardElement(0)
   },
 
   //特殊數字轉換：transformNumber 11,12,13,1 JQKA
@@ -43,6 +36,12 @@ const view = {
     }
   },
 
+  //負責選出#cards並抽換內容
+  displayCards() {
+    const rootElement = document.querySelector('#cards')
+    //用Array.from(Array(52).keys())產生內容有52個的陣列在用array.map迭代
+    rootElement.innerHTML = Array.from(Array(52).keys()).map(index => this.getCardElement(index)).join('')
+  },
 
 }
 
