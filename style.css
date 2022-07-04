@@ -1,9 +1,12 @@
 /*宣告＃card為flex container*/
 #cards {
   display: flex;
+  flex-wrap: wrap;  /*換行*/
 }
 
 .card {
+  box-sizing: border-box;
+  
   /*flex-basis  flex-grow  flex-shrink*/
   flex: 7% 0 1; /*每個item 分配容器寬度*/
   height: 8vw;
@@ -13,6 +16,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
+  margin: 2px;
 }
 
 /*卡片圖片*/
