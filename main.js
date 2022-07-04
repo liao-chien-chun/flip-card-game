@@ -40,9 +40,21 @@ const view = {
   displayCards() {
     const rootElement = document.querySelector('#cards')
     //用Array.from(Array(52).keys())產生內容有52個的陣列在用array.map迭代
-    rootElement.innerHTML = Array.from(Array(52).keys()).map(index => this.getCardElement(index)).join('')
+    rootElement.innerHTML = utility.getRandomNumberArray(52).map(index => this.getCardElement(index)).join('')
   },
 
+}
+
+//洗牌演算法
+const utility = {
+  getRandomNumberArray (count) {
+    const number = Array.from(Array(count).keys())
+    for (let index = number.length - 1; index > 0; index--) {
+      let randomIndex = Math.floor(Math.random() * (index + 1));
+        [number[index], number[randomIndex]] = [number[randomIndex], number[index]]
+    }
+    return number
+  }
 }
 
 view.displayCards()
