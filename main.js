@@ -48,10 +48,10 @@ const view = {
   },
 
   //負責選出#cards並抽換內容
-  displayCards() {
+  displayCards(indexes) {
     const rootElement = document.querySelector('#cards')
     //用Array.from(Array(52).keys())產生內容有52個的陣列在用array.map迭代
-    rootElement.innerHTML = utility.getRandomNumberArray(52).map(index => this.getCardElement(index)).join('')
+    rootElement.innerHTML = indexes.map(index => this.getCardElement(index)).join('')
   },
 
   //翻牌函式
@@ -80,6 +80,10 @@ const model = {
 //Controller 控制要幹嘛
 const controller = {
   currentState: GAME_STATE.FirstCardAwaits, //初始狀態還沒翻牌
+
+  generateCards () {
+    view.displayCards(utility.getRandomNumberArray(52))
+  }
 }
 
 
@@ -99,7 +103,7 @@ const utility = {
   }
 }
 
-view.displayCards()
+controller.generateCards()
 
 //給每張卡片加上監聽器
 //先選出所有卡片會是一個NodeList 在用forEach迭代 把每一張卡片加上監聽器
