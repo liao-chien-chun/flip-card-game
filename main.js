@@ -56,7 +56,7 @@ const view = {
 
   //翻牌函式
   flipCard (card) {
-    console.log(card)
+    // console.log(card)
     if (card.classList.contains('back')) {
       //如果點的是背面回傳正面
       card.classList.remove('back')
@@ -67,7 +67,6 @@ const view = {
     card.classList.add('back')
     card.innerHTML = null
   },
-
 
 }
 
@@ -83,12 +82,30 @@ const controller = {
 
   generateCards () {
     view.displayCards(utility.getRandomNumberArray(52))
+  },
+
+  //推動遊戲，依照不同遊戲狀態做不同的事情
+  dispatchCardAction (card) {
+    //點擊已經翻開的卡片是沒有用的，所以如果點擊的不是背面直接結束程式
+    if (!card.classList.contains('back')) {
+      return
+    }
+    switch (this.currentState) {
+      case GAME_STATE.FirstCardAwaits:
+        view.flipCard(card)
+        model.revealedCards.push(card)
+        this.currentState = GAME_STATE.SecondCardAwaits
+        break
+      case GAME_STATE.SecondCardAwaits:
+        view.flipCard(card)
+        model.revealedCards.push(card)
+        //判斷配對是否成功
+        break
+    }
+    console.log('this.currentState', this.currentState)
+    console.log('revealedCards', model.revealedCards.map(card => card.dataset.index))
   }
 }
-
-
-
-
 
 //洗牌演算法
 const utility = {
@@ -109,7 +126,6 @@ controller.generateCards()
 //先選出所有卡片會是一個NodeList 在用forEach迭代 把每一張卡片加上監聽器
 document.querySelectorAll('.card').forEach(card => {
   card.addEventListener('click', event => {
-    //改成翻牌函式
-    view.flipCard(card)
+    controller.dispatchCardAction(card)
   })
 })
