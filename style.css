@@ -2,13 +2,15 @@
 #cards {
   display: flex;
   flex-wrap: wrap;  /*換行*/
+  width: 85%;
+  margin: 0 auto;
 }
 
 .card {
   box-sizing: border-box;
 
   /*flex-basis  flex-grow  flex-shrink*/
-  flex: 7% 0 1; /*每個item 分配容器寬度*/
+  flex: 7% 1 1; /*每個item 分配容器寬度*/
   height: 8vw;
   border: 2px solid #e0e0e0;
 
