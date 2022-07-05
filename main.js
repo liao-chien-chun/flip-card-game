@@ -123,17 +123,22 @@ const controller = {
         } else {
           //配對失敗
           this.currentState = GAME_STATE.CardsMatchFailed
-          setTimeout(() => {
-            view.flipCards(...model.revealedCards)
-            model.revealedCards = []
-            this.currentState = GAME_STATE.FirstCardAwaits
-          }, 1000)
+          setTimeout(this.resetCards, 1000)
         }
         break
     }
     console.log('this.currentState', this.currentState)
     console.log('revealedCards', model.revealedCards.map(card => card.dataset.index))
-  }
+  },
+
+  //把setTimeout裡面的動作獨立出來
+  resetCards () {
+    view.flipCards(...model.revealedCards)
+    model.revealedCards = []
+    //這邊要從this 改成cotroller
+    controller.currentState = GAME_STATE.FirstCardAwaits
+  },
+
 }
 
 //洗牌演算法
