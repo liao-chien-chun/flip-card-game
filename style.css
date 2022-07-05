@@ -47,3 +47,31 @@
 .paired {
   background-color: #dae0e3;
 }
+
+#header {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 85%;
+}
+#header .title {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+#header .title img {
+  max-width: 3rem;
+}
+#header .title h2 {
+  padding-left: 0.5rem;
+}
+
+#header .score {
+  margin: 0;
+  color: rgb(45, 121, 121);
+}
+#header .tried {
+  margin-top: 0;
+}
+
