@@ -73,7 +73,13 @@ const view = {
 //model處理資料
 const model = {
   //存放被翻開的卡片資料
-  revealedCards: []
+  revealedCards: [],
+
+  //檢查配對成功的函式
+  isRevealedCardsMatched () {
+    // 把他們的index拿出來用13取餘數一樣就代表數字相同
+    return this.revealedCards[0].dataset.index % 13 === this.revealedCards[1].dataset.index % 13
+  }
 }
 
 //Controller 控制要幹嘛
