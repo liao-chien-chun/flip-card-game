@@ -77,3 +77,13 @@
   margin-top: 0;
 }
 
+.wrong {
+  animation-name: wrongAnimation; /*名字*/
+  animation-duration: 0.2s;       /*持續時間*/
+  animation-iteration-count: 5;   /*執行次數*/
+}
+@keyframes wrongAnimation {
+  to {
+    border: 2px solid #ffd54f;
+  }
+}
