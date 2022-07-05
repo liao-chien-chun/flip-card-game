@@ -81,7 +81,7 @@ const view = {
     document.querySelector('.score').innerHTML = `Score: ${score}`
   },
 
-  rendertriedTimes (times) {
+  renderTriedTimes (times) {
     document.querySelector('.tried').innerHTML = `You've tired: ${times} times`
   },
   
@@ -123,11 +123,14 @@ const controller = {
         this.currentState = GAME_STATE.SecondCardAwaits
         break
       case GAME_STATE.SecondCardAwaits:
+        view.renderTriedTimes(++model.triedTimes)
+        console.log(model.triedTimes)
         view.flipCards(card)
         model.revealedCards.push(card)
         //判斷配對是否成功
         if (model.isRevealedCardsMatched()) {
           //配對成功
+          view.renderScore(model.score += 10)
           this.currentState = GAME_STATE.CardsMatched
           view.pairCards(...model.revealedCards)
           model.revealedCards = []
