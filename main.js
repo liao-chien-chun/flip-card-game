@@ -85,6 +85,16 @@ const view = {
     document.querySelector('.tried').innerHTML = `You've tired: ${times} times`
   },
   
+  //動畫特效函式
+  appendWrongAnimation(...cards) {
+    cards.map(card => {
+      card.classList.add('wrong')
+      card.addEventListener('animationend', event => {
+        event.target.classList.remove('wrong'), {once: true}
+      })
+    })
+  }
+
 }
 
 //model處理資料
@@ -124,7 +134,6 @@ const controller = {
         break
       case GAME_STATE.SecondCardAwaits:
         view.renderTriedTimes(++model.triedTimes)
-        console.log(model.triedTimes)
         view.flipCards(card)
         model.revealedCards.push(card)
         //判斷配對是否成功
@@ -138,12 +147,13 @@ const controller = {
         } else {
           //配對失敗
           this.currentState = GAME_STATE.CardsMatchFailed
+          view.appendWrongAnimation(...model.revealedCards)
           setTimeout(this.resetCards, 1000)
         }
         break
     }
-    console.log('this.currentState', this.currentState)
-    console.log('revealedCards', model.revealedCards.map(card => card.dataset.index))
+    // console.log('this.currentState', this.currentState)
+    // console.log('revealedCards', model.revealedCards.map(card => card.dataset.index))
   },
 
   //把setTimeout裡面的動作獨立出來
